@@ -1390,17 +1390,15 @@ def metric_card(label: str, value: str, sub: str = ""):
 # KPI CARDS
 # ------------------------------------------------------------
 def metric_card(label: str, value: str, sub: str = ""):
-    st.markdown(
-        f"""
-        <div class="metric-card">
-            <div class="metric-label">{label}</div>
-            <div class="metric-value">{value}</div>
-            <div class="metric-sub">{sub}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    html = (
+        '<div class="metric-card">'
+        f'<div class="metric-label">{label}</div>'
+        f'<div class="metric-value">{value}</div>'
+        f'<div class="metric-sub">{sub}</div>'
+        '</div>'
     )
 
+    st.markdown(html, unsafe_allow_html=True)
 
 k1, k2, k3, k4 = st.columns(4)
 with k1:
