@@ -1369,11 +1369,23 @@ except ImportError:
 st.markdown("</div>", unsafe_allow_html=True)
 
 except ImportError:
-st.info("Pour activer le rapport PDF : `pip install reportlab kaleido`")
+    st.info(
+        "Pour activer la génération du rapport PDF en local, installe les dépendances : "
+        "`pip install reportlab kaleido`."
+    )
+
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
 
+# ------------------------------------------------------------
+# KPI CARDS
+# ------------------------------------------------------------
+
+def metric_card(label: str, value: str, sub: str = ""):
+    st.markdown(
+        f"""
+        <div class="metric-card">
 # ------------------------------------------------------------
 # KPI CARDS
 # ------------------------------------------------------------
