@@ -1342,39 +1342,30 @@ with exp_col2:
     st.caption(
         "Rapport structuré avec synthèse, analyses graphiques et recommandations stratégiques."
     )
-try:
     if st.button("📄 Télécharger le rapport PDF", key="export_pdf"):
         try:
-            pdf_bytes = generate_pdf_report(df_filtered, active_filters)
-        except Exception:
-            # Erreur typique sur Streamlit Cloud (Kaleido / Chrome manquant)
-            st.error(
-                "La génération du rapport PDF avec graphiques n'est pas disponible sur "
-                "Streamlit Cloud (problème Kaleido / Google Chrome manquant). "
-                "Tu peux générer le PDF en local sur ton ordinateur."
-            )
-        else:
+            pdf_bytes = generate_pdf_report(fdf, active_filters)
             st.download_button(
-                "⬇️ Télécharger le rapport PDF",
+                "⬇️ Télécharger le PDF",
                 data=pdf_bytes,
                 file_name="rapport_aero_analytics.pdf",
                 mime="application/pdf",
+                key="download_pdf",
             )
-except ImportError:
-    st.info(
-        "Pour activer la génération du rapport PDF en local, installe les dépendances : "
-        "`pip install reportlab kaleido`."
-    )
+        except ImportError:
+            st.info(
+                "Pour activer la génération du rapport PDF, ajoute `reportlab` et `kaleido` "
+                "dans requirements.txt."
+            )
+        except Exception as e:
+            st.error(
+                "La génération du PDF n'est pas disponible dans cet environnement. "
+                "Sur Streamlit Cloud, Kaleido peut nécessiter Google Chrome. "
+                f"Détail technique : {e}"
+            )
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-except ImportError:
-    st.info(
-        "Pour activer la génération du rapport PDF en local, installe les dépendances : "
-        "`pip install reportlab kaleido`."
-    )
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 st.divider()
 
@@ -1382,11 +1373,6 @@ st.divider()
 # KPI CARDS
 # ------------------------------------------------------------
 
-def metric_card(label: str, value: str, sub: str = ""):
-    st.markdown(
-        f"""
-        <div class="metric-card">
-# ------------------------------------------------------------
 # KPI CARDS
 # ------------------------------------------------------------
 def metric_card(label: str, value: str, sub: str = ""):
@@ -1591,11 +1577,11 @@ else:
         st.markdown("------")
 
         # Carte axes pro
-       st.markdown(
-    '<div class="axis-card">'
-    '<div class="axis-title">Paramètres du nuage de points</div>',
-    unsafe_allow_html=True,
-      )
+        st.markdown(
+            '<div class="axis-card">'
+            '<div class="axis-title">Paramètres du nuage de points</div>',
+            unsafe_allow_html=True,
+        )
 
         if len(NUM_COLS) >= 2:
             c1, c2, c3 = st.columns([2.2, 2.2, 1.2])
