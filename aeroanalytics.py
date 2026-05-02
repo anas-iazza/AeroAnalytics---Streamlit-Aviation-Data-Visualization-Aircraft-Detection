@@ -1593,13 +1593,11 @@ else:
         st.markdown("------")
 
         # Carte axes pro
-        st.markdown(
-            """
-            <div class="axis-card">
-                <div class="axis-title">Paramètres du nuage de points</div>
-            """,
-            unsafe_allow_html=True,
-        )
+       st.markdown(
+    '<div class="axis-card">'
+    '<div class="axis-title">Paramètres du nuage de points</div>',
+    unsafe_allow_html=True,
+      )
 
         if len(NUM_COLS) >= 2:
             c1, c2, c3 = st.columns([2.2, 2.2, 1.2])
