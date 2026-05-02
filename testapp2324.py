@@ -1342,8 +1342,6 @@ with exp_col2:
     st.caption(
         "Rapport structuré avec synthèse, analyses graphiques et recommandations stratégiques."
     )
-    try:
-        # Bouton export PDF
 try:
     if st.button("📄 Télécharger le rapport PDF", key="export_pdf"):
         try:
